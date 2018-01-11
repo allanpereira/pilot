@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import {
+  arrayOf,
+  bool,
+  func,
+  oneOf,
+  oneOfType,
   shape,
   string,
-  oneOf,
-  arrayOf,
-  oneOfType,
-  func,
+  number,
 } from 'prop-types'
 import {
   path,
@@ -16,7 +18,8 @@ import { themr } from 'react-css-themr'
 import shortid from 'shortid'
 
 import IconArrowDown from 'react-icons/lib/md/keyboard-arrow-down'
-
+import IconArrowUp from 'react-icons/lib/md/keyboard-arrow-up'
+import Button from '../Button'
 import Checkbox from '../Checkbox'
 
 const applyThemr = themr('UITable')
@@ -51,13 +54,13 @@ class TableRow extends Component {
   }
 
   handleExpand () {
-    const { data, onExpand } = this.props
-    onExpand(data)
+    const { index, onExpand } = this.props
+    onExpand(index)
   }
 
   handleSelect () {
-    const { data, onSelect } = this.props
-    onSelect(data)
+    const { index, onSelect } = this.props
+    onSelect(index)
   }
 
   render () {
@@ -67,35 +70,43 @@ class TableRow extends Component {
       data,
       striped,
       theme,
+      expanded,
+      selected,
+      index,
     } = this.props
 
     const tableRow = classNames(
       theme[striped],
       className
     )
-    const checked = false
+
     return (
       <tr className={tableRow}>
         <td>
           <Checkbox
-            name="1"
-            id="1"
-            value="1"
+            name={`line_${index + 1}`}
+            id={shortid()}
+            value={`${index}`}
             label=""
             onChange={this.handleSelect}
-            checked={checked}
+            checked={selected}
           />
         </td>
         {
           renderCells(columns, data)
         }
         <td className={theme.open}>
-          <div
+          <Button
+            type="button"
+            fill="outline"
+            size="tiny"
+            relevance="low"
             className={theme.arrow}
-            onChange={this.handleExpand}
+            onClick={this.handleExpand}
           >
-            <IconArrowDown />
-          </div>
+            { !expanded && <IconArrowDown />}
+            { expanded && <IconArrowUp />}
+          </Button>
         </td>
       </tr>
     )
@@ -110,7 +121,6 @@ TableRow.propTypes = {
     status: string,
     open: string,
   }),
-  striped: oneOf(['even', 'odd']),
   className: string,
   columns: arrayOf(shape({
     title: string.isRequired,
@@ -121,16 +131,22 @@ TableRow.propTypes = {
     renderer: func,
   })).isRequired,
   data: shape({}).isRequired,
-  onSelect: func,
+  expanded: bool,
   onExpand: func,
+  onSelect: func,
+  selected: bool,
+  striped: oneOf(['even', 'odd']),
+  index: number.isRequired,
 }
 
 TableRow.defaultProps = {
-  theme: {},
-  striped: 'even',
   className: '',
-  onSelect: () => null,
+  expanded: false,
   onExpand: () => null,
+  onSelect: () => null,
+  selected: false,
+  striped: 'even',
+  theme: {},
 }
 
 export default applyThemr(TableRow)
