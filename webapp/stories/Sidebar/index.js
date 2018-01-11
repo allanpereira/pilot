@@ -10,6 +10,8 @@ import {
   Sidebar,
   SidebarHeader,
   SidebarContent,
+  SidebarLinks,
+  SidebarLink,
 } from '../../src/components/Sidebar'
 
 import Tag from '../../src/components/Tag'
@@ -111,6 +113,15 @@ class SidebarState extends React.Component {
             : <Tag key={selectedEnvironment}>{selectedEnvironment}</Tag>
           }
         </SidebarContent>
+
+        <SidebarLinks>
+          <SidebarLink
+            active={true}
+            to="/minha-conta"
+            title="Minha Conta"
+            icon={<MdEventNote />}
+          />
+        </SidebarLinks>
       </Sidebar>
     )
   }

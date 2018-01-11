@@ -59,7 +59,7 @@
   color: var(--sidebar-item-hover-color);
 }
 
-.itemSelected {
+.active {
   background-color: var(--sidebar-item-selected-background-color);
   border-bottom-color: var(--sidebar-item-selected-border-bottom-color);
   border-top-color: var(--sidebar-item-selected-border-top-color);
