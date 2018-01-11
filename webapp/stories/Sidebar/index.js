@@ -1,9 +1,14 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+
+import MdMenu from 'react-icons/lib/md/menu'
 import MdEventNote from 'react-icons/lib/md/event-note'
 import MdFreeBreakfast from 'react-icons/lib/md/free-breakfast'
 
-import Sidebar from '../../src/components/Sidebar'
+import {
+  Sidebar,
+  SidebarHeader,
+} from '../../src/components/Sidebar'
 
 const items = [
   {
@@ -49,40 +54,43 @@ const infos = {
 }
 
 class SidebarState extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
+      collapsed: false,
       selectedEnvironment: 'live',
     }
 
     this.handleEnvironment = this.handleEnvironment.bind(this)
   }
 
-  handleEnvironment (env) {
+  handleEnvironment(env) {
     this.setState({
       selectedEnvironment: env,
     })
   }
 
-  render () {
+  render() {
     return (
       <Sidebar
-        logo="https://assets.pagar.me/site/general/logo-light-3812e7ea6b596bdcc8c041f0edc4ff15.png"
-        title="Pagar.me"
+        collapsed={this.state.collapsed}
         items={items}
         selected="transacoes.estornadas"
         onSwitchChange={this.handleEnvironment}
         selectedEnvironment={this.state.selectedEnvironment}
         infos={infos}
-      />
+      >
+        <SidebarHeader>
+          <img src="https://assets.pagar.me/site/general/logo-light-3812e7ea6b596bdcc8c041f0edc4ff15.png" alt="Pagar.me" />
+          <button onClick={() => this.setState({ collapsed: !this.state.collapsed })}>
+            <MdMenu />
+          </button>
+        </SidebarHeader>
+      </Sidebar>
     )
   }
 }
 
 storiesOf('Sidebar', module)
-  .add('defaultTheme', () => (
-    <div>
-      <SidebarState />
-    </div>
-  ))
+  .add('defaultTheme', () => <SidebarState />)

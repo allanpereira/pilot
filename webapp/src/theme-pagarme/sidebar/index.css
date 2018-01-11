@@ -1,6 +1,8 @@
 @import "../colors.css";
 @import "./properties.css";
 
+@import "./sidebar-header.css";
+
 .sidebar,
 .sidebar * {
   box-sizing: border-box;
@@ -14,33 +16,6 @@
   position: fixed;
   top: 0;
   width: var(--sidebar-width);
-}
-
-.header {
-  align-items: center;
-  border-bottom: var(--sidebar-header-border-bottom);
-  display: flex;
-  justify-content: space-between;
-  padding: var(--sidebar-header-padding);
-}
-
-.brand {
-  display: block;
-  width: var(--sidebar-brand-width);
-}
-
-.menu {
-  background: var(--sidebar-menu-background);
-  border: var(--sidebar-menu-border);
-  color: var(--sidebar-menu-color);
-  cursor: pointer;
-  outline: none;
-  padding: var(--sidebar-menu-padding);
-
-  & svg {
-    height: var(--sidebar-menu-icon-height);
-    width: var(--sidebar-menu-icon-width);
-  }
 }
 
 .section {
