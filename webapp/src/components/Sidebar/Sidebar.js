@@ -5,7 +5,6 @@ import shortid from 'shortid'
 import cx from 'classnames'
 import IconArrowUp from 'react-icons/lib/md/keyboard-arrow-up'
 import IconArrowDown from 'react-icons/lib/md/keyboard-arrow-down'
-import SegmentedSwitch from '../SegmentedSwitch'
 import Tag from '../Tag'
 import Button from '../Button'
 
@@ -157,7 +156,6 @@ class Sidebar extends React.Component {
       theme,
       children,
       selectedEnvironment,
-      onSwitchChange,
       collapsed,
     } = this.props
 
@@ -171,14 +169,6 @@ class Sidebar extends React.Component {
         <div className={theme.section}>
           {!collapsed &&
             <div>
-              <div className={theme.switchContainer}>
-                <SegmentedSwitch
-                  items={['live', 'test']}
-                  selected={selectedEnvironment}
-                  name={`${this.id}-live-test`}
-                  onChange={onSwitchChange}
-                />
-              </div>
               {this.renderInfos()}
             </div>
           }
@@ -224,7 +214,6 @@ Sidebar.propTypes = {
       title: PropTypes.string.isRequired,
     })),
   })).isRequired,
-  onSwitchChange: PropTypes.func.isRequired,
   selectedEnvironment: PropTypes.string.isRequired,
   infos: PropTypes.shape({
     title: PropTypes.string,

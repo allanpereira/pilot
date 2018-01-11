@@ -4,11 +4,15 @@ import { storiesOf } from '@storybook/react'
 import MdMenu from 'react-icons/lib/md/menu'
 import MdEventNote from 'react-icons/lib/md/event-note'
 import MdFreeBreakfast from 'react-icons/lib/md/free-breakfast'
+import shortid from 'shortid'
 
 import {
   Sidebar,
   SidebarHeader,
+  SidebarContent
 } from '../../src/components/Sidebar'
+
+import SegmentedSwitch from '../../src/components/SegmentedSwitch'
 
 const items = [
   {
@@ -54,8 +58,10 @@ const infos = {
 }
 
 class SidebarState extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
+
+    this.id = shortid.generate()
 
     this.state = {
       collapsed: false,
@@ -65,16 +71,20 @@ class SidebarState extends React.Component {
     this.handleEnvironment = this.handleEnvironment.bind(this)
   }
 
-  handleEnvironment(env) {
+  handleEnvironment (env) {
     this.setState({
       selectedEnvironment: env,
     })
   }
 
   render() {
+    const {
+      collapsed
+    } = this.state
+
     return (
       <Sidebar
-        collapsed={this.state.collapsed}
+        collapsed={collapsed}
         items={items}
         selected="transacoes.estornadas"
         onSwitchChange={this.handleEnvironment}
@@ -83,10 +93,21 @@ class SidebarState extends React.Component {
       >
         <SidebarHeader>
           <img src="https://assets.pagar.me/site/general/logo-light-3812e7ea6b596bdcc8c041f0edc4ff15.png" alt="Pagar.me" />
-          <button onClick={() => this.setState({ collapsed: !this.state.collapsed })}>
+          <button onClick={() => this.setState({ collapsed: !collapsed })}>
             <MdMenu />
           </button>
         </SidebarHeader>
+
+        <SidebarContent>
+          {!collapsed &&
+            <SegmentedSwitch
+              items={['live', 'test']}
+              selected={this.state.selectedEnvironment}
+              name={`${this.id}-live-test`}
+              onChange={this.handleEnvironment}
+            />
+          }
+        </SidebarContent>
       </Sidebar>
     )
   }

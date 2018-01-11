@@ -23,7 +23,7 @@
   overflow: auto;
 }
 
-.switchContainer {
+.content {
   display: flex;
   justify-content: center;
   padding-bottom: var(--sidebar-switch-container-padding-bottom);
