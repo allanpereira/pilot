@@ -171,11 +171,11 @@ class Sidebar extends React.Component {
             </div>
           }
 
-          <nav className={theme.items}>
+          {/* <nav className={theme.items}>
             <ul>
               {this.renderList()}
             </ul>
-          </nav>
+          </nav> */}
         </div>
       </div>
     )

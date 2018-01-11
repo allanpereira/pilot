@@ -9,7 +9,7 @@ import shortid from 'shortid'
 import {
   Sidebar,
   SidebarHeader,
-  SidebarContent
+  SidebarContent,
 } from '../../src/components/Sidebar'
 
 import Tag from '../../src/components/Tag'
