@@ -4,6 +4,7 @@ import {
   bool,
   func,
   number,
+  oneOf,
   oneOfType,
   shape,
   string,
@@ -45,9 +46,9 @@ const applyThemr = themr('UITable')
  *
  * @param {Boolean} sorable
  * @param {Boolean} loading
- * @param {Boolean} selectalbe
+ * @param {Boolean} selectable
  * @param {Boolean} expandable
- * @param {Number} columnsLimit - limit of showable columns except by the utility
+ * @param {Number} columnsNumber - limit of showable columns except by the utility
  * columns like select and expand
  */
 
@@ -70,19 +71,35 @@ const getStripedClass = ifElse(
   () => 'even'
 )
 
+const isAscending = order => order === 'ascending'
+
+const getToggledOrder = ifElse(
+  isAscending,
+  () => 'descending',
+  () => 'ascending'
+)
+
+const getExpansibleColumn = (columns, columnsNumber) =>
+  columns.filter((col, idx) => idx >= columnsNumber)
 
 class Table extends Component {
   constructor (props) {
     super(props)
-    const { expandedRows, selectedRows } = props
+    const {
+      expandedRows,
+      selectedRows,
+      columnIndex,
+    } = props
     this.state = {
       expandedRows,
       selectedRows,
+      columnIndex,
     }
-
-    this.renderRow = this.renderRow.bind(this)
-    this.handleRowSelect = this.handleRowSelect.bind(this)
+    this.handleColumnOrder = this.handleColumnOrder.bind(this)
     this.handleRowExpand = this.handleRowExpand.bind(this)
+    this.handleRowSelect = this.handleRowSelect.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.renderRow = this.renderRow.bind(this)
   }
 
   handleRowSelect (rowIndex) {
@@ -100,31 +117,69 @@ class Table extends Component {
     })
   }
 
+  handleColumnOrder (index) {
+    const { columnIndex } = this.state
+    const { orderingSequence, onOrder } = this.props
+
+    if (index === columnIndex) {
+      onOrder(index, getToggledOrder(orderingSequence))
+    } else {
+      this.setState({
+        columnIndex: index,
+      })
+      onOrder(index, orderingSequence)
+    }
+  }
+
+  handleSelect () {
+    const { selectedRows } = this.state
+    const { rows } = this.props
+    if (selectedRows.length === rows.length) {
+      this.setState({
+        selectedRows: [],
+      })
+    } else {
+      this.setState({
+        selectedRows: rows.map((row, index) => index),
+      })
+    }
+  }
+
   renderRow (row, index) {
     const { expandedRows, selectedRows } = this.state
-    const { selectable, expandable, columns } = this.props
+    const {
+      columns,
+      columnsNumber,
+      expandable,
+      selectable,
+    } = this.props
     const isExpanded = contains(index, expandedRows)
     const isSelected = contains(index, selectedRows)
     const stripedClass = getStripedClass(index)
 
     const rowProps = {
-      key: shortid(),
-      data: row,
       columns,
-      striped: stripedClass,
+      columnsNumber,
+      data: row,
+      expandable,
+      expanded: isExpanded,
+      index,
+      key: shortid(),
       onExpand: this.handleRowExpand,
       onSelect: this.handleRowSelect,
       selectable,
-      expandable,
-      expanded: isExpanded,
       selected: isSelected,
-      index,
+      striped: stripedClass,
     }
 
     const newRow = <TableRow {...rowProps} />
 
     if (isExpanded) {
-      const expanded = <TableExpandedRow striped={stripedClass} data={row} />
+      const expanded = (<TableExpandedRow
+        striped={stripedClass}
+        data={row}
+        columns={getExpansibleColumn(columns, columnsNumber)}
+      />)
 
       return [
         newRow,
@@ -140,10 +195,24 @@ class Table extends Component {
       theme,
       rows,
       columns,
+      columnIndex,
+      orderingSequence,
     } = this.props
+
+    const allSelected = this.state.selectedRows.length === rows.length
+
     return (
       <table className={theme.table}>
-        <TableHead columns={columns} />
+        <TableHead
+          columns={columns}
+          columnIndex={columnIndex}
+          onOrder={this.handleColumnOrder}
+          onSelect={this.handleSelect}
+          selectable
+          expandable
+          allSelected={allSelected}
+          order={orderingSequence}
+        />
         <tbody className={theme.tableBody}>
           {
             rows.map(this.renderRow)
@@ -166,25 +235,34 @@ Table.propTypes = {
     ]),
     renderer: func,
   })).isRequired,
+  columnIndex: number,
+  columnsNumber: number,
   expandable: bool,
+  expandedRows: arrayOf(number),
+  onOrder: func.isRequired,
+  onOpenDetails: func,
+  onSelectRow: func,
+  orderingColumn: number,
+  orderingSequence: oneOf(['ascending', 'descending']),
   rows: arrayOf(shape({})).isRequired,
   selectable: bool,
   selectedRows: arrayOf(number),
-  expandedRows: arrayOf(number),
-  onOpenDetails: func,
-  onSelectRow: func,
 }
 
 Table.defaultProps = {
-  theme: {},
   columns: [],
-  rows: [],
-  selectable: true,
+  columnIndex: 0,
+  columnsNumber: 7,
   expandable: true,
-  selectedRows: [],
   expandedRows: [],
   onOpenDetails: null,
   onSelectRow: null,
+  orderingColumn: 1,
+  orderingSequence: 'ascending',
+  rows: [],
+  selectable: true,
+  selectedRows: [],
+  theme: {},
 }
 
 export default applyThemr(Table)

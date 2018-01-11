@@ -21,6 +21,7 @@ import IconArrowDown from 'react-icons/lib/md/keyboard-arrow-down'
 import IconArrowUp from 'react-icons/lib/md/keyboard-arrow-up'
 import Button from '../Button'
 import Checkbox from '../Checkbox'
+import TableEmptyItem from './TableEmptyItem'
 
 const applyThemr = themr('UITable')
 
@@ -38,7 +39,7 @@ const getColData = (column, data) => {
   if (columnData) {
     return <td key={key}> {columnData} </td>
   }
-  return <td key={key}> special </td>
+  return <td key={key}><TableEmptyItem /></td>
 }
 
 const renderCells = (columns, data) =>

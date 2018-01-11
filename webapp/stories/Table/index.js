@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 
 import { storiesOf } from '@storybook/react'
 
@@ -9,6 +9,7 @@ import style from './style.css'
 
 const mock = {
   columns: [
+    { title: 'Id da transacao', acessor: ['id'] },
     {
       title: 'Status',
       renderer: item => (
@@ -21,7 +22,6 @@ const mock = {
         </Legend>
       ),
     },
-    { title: 'Id da transacao', acessor: ['id'] },
     { title: 'Data da transacao', acessor: ['date_created'] },
     { title: 'Cpf/Cnpj', acessor: ['document_number'] },
     { title: 'Forma de pagamento', acessor: ['payment_method'] },
@@ -54,19 +54,46 @@ const mock = {
   ],
 }
 
+class TableState extends PureComponent {
+  constructor () {
+    super()
+    this.state = {
+      columnIndex: 0,
+      order: 'ascending'
+    }
+    this.handleOrderChange = this.handleOrderChange.bind(this)
+  }
+  handleOrderChange (index, order) {
+    this.setState({
+      columnIndex: index,
+      order
+    })
+  }
+  render () {
+    const {
+      columnIndex,
+      order,
+    } = this.state
+    return (
+      <div className={style.container}>
+        <Table
+          columns={mock.columns}
+          rows={mock.data}
+          selectable
+          expandable
+          selectedRows={[0]}
+          expandedRows={[1]}
+          onSelectRow={() => null}
+          onExpandRow={() => null}
+          onOrder={this.handleOrderChange}
+          orderingSequence={order}
+          columnIndex={columnIndex}
+        />
+      </div>
+    )
+  }
+}
+
 storiesOf('Table', module)
-  .add('defaultTheme', () => (
-    <div className={style.container}>
-      <Table
-        columns={mock.columns}
-        rows={mock.data}
-        selectable
-        expandable
-        selectedRows={[0]}
-        expandedRows={[1]}
-        onSelectRow={() => null}
-        onExpandRow={() => null}
-      />
-    </div>
-  ))
+  .add('defaultTheme', () => <TableState />)
 
