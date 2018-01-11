@@ -12,6 +12,7 @@ import {
   SidebarContent
 } from '../../src/components/Sidebar'
 
+import Tag from '../../src/components/Tag'
 import SegmentedSwitch from '../../src/components/SegmentedSwitch'
 
 const items = [
@@ -79,7 +80,8 @@ class SidebarState extends React.Component {
 
   render() {
     const {
-      collapsed
+      collapsed,
+      selectedEnvironment,
     } = this.state
 
     return (
@@ -99,13 +101,14 @@ class SidebarState extends React.Component {
         </SidebarHeader>
 
         <SidebarContent>
-          {!collapsed &&
-            <SegmentedSwitch
-              items={['live', 'test']}
-              selected={this.state.selectedEnvironment}
-              name={`${this.id}-live-test`}
-              onChange={this.handleEnvironment}
-            />
+          {!collapsed
+            ? <SegmentedSwitch
+                items={['live', 'test']}
+                selected={this.state.selectedEnvironment}
+                name={`${this.id}-live-test`}
+                onChange={this.handleEnvironment}
+              />
+            : <Tag key={selectedEnvironment}>{selectedEnvironment}</Tag>
           }
         </SidebarContent>
       </Sidebar>

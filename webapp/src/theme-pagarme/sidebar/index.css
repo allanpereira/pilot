@@ -141,12 +141,6 @@
   }
 }
 
-.selectedEnvironment {
-  padding-bottom: var(--sidebar-selected-environment-padding-bottom);
-  padding-top: var(--sidebar-selected-environment-padding-top);
-  text-align: center;
-}
-
 .info {
   & .title,
   & .toggle {

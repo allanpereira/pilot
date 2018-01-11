@@ -46,9 +46,6 @@
   --sidebar-collapsed-header-icon-color: var(--color-light-greenish-100);
   --sidebar-collapsed-text-link-margin: 0;
 
-  --sidebar-selected-environment-padding-top: 15px;
-  --sidebar-selected-environment-padding-bottom: 15px;
-
   --sidebar-toggle-color: var(--color-light-greenish-100);
   --sidebar-toggle-margin-top: 0;
   --sidebar-toggle-margin-bottom: 15px;

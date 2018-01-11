@@ -5,7 +5,6 @@ import shortid from 'shortid'
 import cx from 'classnames'
 import IconArrowUp from 'react-icons/lib/md/keyboard-arrow-up'
 import IconArrowDown from 'react-icons/lib/md/keyboard-arrow-down'
-import Tag from '../Tag'
 import Button from '../Button'
 
 const applyThemr = themr('UISidebar')
@@ -155,7 +154,6 @@ class Sidebar extends React.Component {
     const {
       theme,
       children,
-      selectedEnvironment,
       collapsed,
     } = this.props
 
@@ -170,12 +168,6 @@ class Sidebar extends React.Component {
           {!collapsed &&
             <div>
               {this.renderInfos()}
-            </div>
-          }
-
-          {collapsed &&
-            <div className={theme.selectedEnvironment}>
-              <Tag key={selectedEnvironment}>{selectedEnvironment}</Tag>
             </div>
           }
 
@@ -202,7 +194,6 @@ Sidebar.propTypes = {
     sidebar: PropTypes.string,
     collapsed: PropTypes.string,
     switchContainer: PropTypes.string,
-    selectedEnvironment: PropTypes.string,
     showInfos: PropTypes.string,
   }),
   items: PropTypes.arrayOf(PropTypes.shape({
@@ -214,7 +205,6 @@ Sidebar.propTypes = {
       title: PropTypes.string.isRequired,
     })),
   })).isRequired,
-  selectedEnvironment: PropTypes.string.isRequired,
   infos: PropTypes.shape({
     title: PropTypes.string,
     showMsg: PropTypes.string,
