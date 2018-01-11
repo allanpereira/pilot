@@ -1,10 +1,10 @@
 @import "./properties.css";
 
 .segmentedSwitch {
-  padding: var(--context-switch-padding);
   display: inline-flex;
   border-radius: var(--context-switch-border-radius);
   user-select: none;
+  border: var(--context-switch-border);
   background-color: var(--context-switch-label-backgound-color);
   box-shadow: var(--context-switch-box-shadow);
 }

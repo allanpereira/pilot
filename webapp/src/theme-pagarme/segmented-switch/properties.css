@@ -2,7 +2,7 @@
 @import "../typography.css";
 
 :root {
-  --context-switch-padding: 1.9px 2px;
+  --context-switch-border: 1px solid var(--color-light-carbon-100);
   --context-switch-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.55);
   --context-switch-label-font-size: 10px;
   --context-switch-checked-background-color: var(--color-light-greenish-100);
