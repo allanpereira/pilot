@@ -14,7 +14,9 @@
   --sidebar-switch-container-padding-top: 15px;
   --sidebar-switch-container-padding-bottom: 15px;
 
-  --sidebar-items-list-padding: 12px 0;
+  --sidebar-items-list-padding: 0;
+  --sidebar-items-list-margin: 24px;
+
   --sidebar-item-color: var(--color-white);
   --sidebar-item-border: 1px solid transparent;
   --sidebar-item-icon-margin-right: 15px;
@@ -47,11 +49,38 @@
   --sidebar-selected-environment-padding-top: 15px;
   --sidebar-selected-environment-padding-bottom: 15px;
 
+  --sidebar-toggle-color: var(--color-light-greenish-100);
+  --sidebar-toggle-margin-top: 0;
+  --sidebar-toggle-margin-bottom: 15px;
+  --sidebar-toggle-text-transform: lowercase;
+  --sidebar-toggle-paragraph-margin: 0;
+
   --sidebar-menu-icon-width: 25px;
   --sidebar-menu-icon-height: 25px;
+  --sidebar-info-options-border-bottom: 1px solid var(--color-light-steel-200);
+  --sidebar-info-options-list-margin: 0;
+  --sidebar-info-options-list-padding: 0;
+  --sidebar-info-options-list-margin-top: 24px;
+  --sidebar-info-options-list-item-padding: 15px;
+  --sidebar-info-options-list-item-border-top: 1px solid rgba(var(--color-light-greenish-100), 0.1);
+  --sidebar-info-options-last-child-margin-top: 16px;
+  --sidebar-info-options-last-child-margin-bottom: 16px;
   --sidebar-info-options-font-size: 12px;
+  --sidebar-info-options-maring: 0;
+  --sidebar-info-options-text-transform: uppercase;
   --sidebar-info-options-last-child-font-size: 24px;
   --sidebar-info-options-small-font-size: 16px;
+
+  --sidebar-title-color: var(--color-white);
+  --sidebar-title-line-height: 3.17;
+  --sidebar-title-margin: 0;
+
+  --sidebar-showinfo-background-color: var(--color-light-carbon-100);
+
+  --sidebar-info-toggle-padding-left: 15px;
+  --sidebar-info-toggle-padding-right: 15px;
+
+  --sidebar-section-height: calc(100vh - 56px);
 }
 
 @media (--media-tablet) {
