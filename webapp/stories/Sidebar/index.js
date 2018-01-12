@@ -16,27 +16,18 @@ import {
 
 import Tag from '../../src/components/Tag'
 import SegmentedSwitch from '../../src/components/SegmentedSwitch'
+import Balance from '../../src/components/Balance'
 
 const items = [
   {
     value: 'minha-conta',
     title: 'Minha conta',
-    icon: MdEventNote,
+    icon: <MdEventNote />,
   },
   {
     value: 'transacoes',
     title: 'Transações',
-    icon: MdFreeBreakfast,
-    options: [
-      {
-        value: 'estornadas',
-        title: 'Estornadas',
-      },
-      {
-        value: 'pagas',
-        title: 'Pagas',
-      }
-    ]
+    icon: <MdFreeBreakfast />,
   },
 ]
 
@@ -69,6 +60,8 @@ class SidebarState extends React.Component {
     this.state = {
       collapsed: false,
       selectedEnvironment: 'live',
+      active: '',
+      showInfos: false,
     }
 
     this.handleEnvironment = this.handleEnvironment.bind(this)
@@ -80,10 +73,11 @@ class SidebarState extends React.Component {
     })
   }
 
-  render() {
+  render () {
     const {
       collapsed,
       selectedEnvironment,
+      showInfos,
     } = this.state
 
     return (
@@ -92,7 +86,7 @@ class SidebarState extends React.Component {
         items={items}
         selected="transacoes.estornadas"
         onSwitchChange={this.handleEnvironment}
-        selectedEnvironment={this.state.selectedEnvironment}
+        selectedEnvironment={selectedEnvironment}
         infos={infos}
       >
         <SidebarHeader>
@@ -103,24 +97,41 @@ class SidebarState extends React.Component {
         </SidebarHeader>
 
         <SidebarContent>
-          {!collapsed
-            ? <SegmentedSwitch
-                items={['live', 'test']}
-                selected={this.state.selectedEnvironment}
-                name={`${this.id}-live-test`}
-                onChange={this.handleEnvironment}
-              />
+          {!collapsed ?
+            <SegmentedSwitch
+              items={['live', 'test']}
+              selected={this.state.selectedEnvironment}
+              name={`${this.id}-live-test`}
+              onChange={this.handleEnvironment}
+            />
             : <Tag key={selectedEnvironment}>{selectedEnvironment}</Tag>
           }
         </SidebarContent>
 
-        <SidebarLinks>
+        { !collapsed &&
           <SidebarLink
-            active={true}
-            to="/minha-conta"
-            title="Minha Conta"
-            icon={<MdEventNote />}
-          />
+            title="Nome da empresa"
+            subTitle={showInfos ? 'ocultar saldo' : 'mostrar saldo'}
+            info
+            showInfos={showInfos}
+            onClick={() => this.setState({ showInfos: !showInfos })}
+          >
+            {showInfos &&
+              <Balance infos={infos.data} />
+            }
+          </SidebarLink>
+        }
+
+        <SidebarLinks>
+          {items.map(item => (
+            <SidebarLink
+              active={item.value === this.state.active}
+              to={item.value}
+              title={item.title}
+              icon={item.icon}
+              onClick={to => this.setState({ active: to })}
+            />
+          ))}
         </SidebarLinks>
       </Sidebar>
     )

@@ -1,0 +1,17 @@
+@import "../colors.css";
+
+:root {
+  --sidebar-info-options-border-bottom: 1px solid var(--color-light-steel-200);
+  --sidebar-info-options-list-margin: 0;
+  --sidebar-info-options-list-padding: 0;
+  --sidebar-info-options-list-margin-top: 24px;
+  --sidebar-info-options-list-item-padding: 15px;
+  --sidebar-info-options-list-item-border-top: 1px solid rgba(var(--color-light-greenish-100), 0.1);
+  --sidebar-info-options-last-child-margin-top: 16px;
+  --sidebar-info-options-last-child-margin-bottom: 16px;
+  --sidebar-info-options-font-size: 12px;
+  --sidebar-info-options-maring: 0;
+  --sidebar-info-options-text-transform: uppercase;
+  --sidebar-info-options-last-child-font-size: 24px;
+  --sidebar-info-options-small-font-size: 16px;
+}
