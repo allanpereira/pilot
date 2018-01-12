@@ -40,15 +40,15 @@ const infos = {
       title: 'Disponível',
       value: <p><small>R$</small> 150000</p>,
       actionTitle: 'Sacar',
-      action: (a) => console.log(a),
+      action: a => console.log(a),
     },
     {
       title: 'A receber',
       value: <p><small>R$</small> 70000</p>,
       actionTitle: 'Antecipar',
-      action: (a) => console.log(a),
-    }
-  ]
+      action: a => console.log(a),
+    },
+  ],
 }
 
 class SidebarState extends React.Component {
@@ -118,6 +118,7 @@ class SidebarState extends React.Component {
         <SidebarLinks>
           {items.map(item => (
             <SidebarLink
+              key={item.value}
               active={item.value === this.state.active}
               to={item.value}
               title={item.title}

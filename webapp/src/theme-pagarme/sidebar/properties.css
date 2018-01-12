@@ -33,7 +33,7 @@
 
   --sidebar-text-link-color: inherit;
   --sidebar-text-link-padding: 12px 15px;
-  --sidebar-text-link-margin:  0;
+  --sidebar-text-link-margin: 0;
 
   --sidebar-item-text-link-padding-top: 27px;
   --sidebar-item-text-link-padding-bottom: 27px;
@@ -68,6 +68,7 @@
 }
 
 @media (--media-tablet) {
+
   :root {
     --sidebar-width: 192px;
     --sidebar-brand-width: 100px;
@@ -82,6 +83,7 @@
 }
 
 @media (--media-desk) {
+
   :root {
     --sidebar-width: 222px;
     --sidebar-brand-width: 115px;
@@ -96,6 +98,7 @@
 }
 
 @media (--media-tv) {
+
   :root {
     --sidebar-width: 320px;
     --sidebar-brand-width: 170px;

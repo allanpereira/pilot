@@ -1,6 +1,5 @@
 @import "../colors.css";
 @import "./properties.css";
-
 @import "./sidebar-header.css";
 
 .sidebar,
@@ -142,6 +141,7 @@
 }
 
 .info {
+
   & .title,
   & .toggle {
     padding-left: var(--sidebar-info-toggle-padding-left);
