@@ -81,14 +81,7 @@ class SidebarState extends React.Component {
     } = this.state
 
     return (
-      <Sidebar
-        collapsed={collapsed}
-        items={items}
-        selected="transacoes.estornadas"
-        onSwitchChange={this.handleEnvironment}
-        selectedEnvironment={selectedEnvironment}
-        infos={infos}
-      >
+      <Sidebar collapsed={collapsed}>
         <SidebarHeader>
           <img src="https://assets.pagar.me/site/general/logo-light-3812e7ea6b596bdcc8c041f0edc4ff15.png" alt="Pagar.me" />
           <button onClick={() => this.setState({ collapsed: !collapsed })}>
@@ -108,7 +101,7 @@ class SidebarState extends React.Component {
           }
         </SidebarContent>
 
-        { !collapsed &&
+        {!collapsed &&
           <SidebarLink
             title="Nome da empresa"
             subTitle={showInfos ? 'ocultar saldo' : 'mostrar saldo'}
