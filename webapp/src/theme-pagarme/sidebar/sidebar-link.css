@@ -1,0 +1,98 @@
+@import "../colors.css";
+@import "./properties.css";
+
+.items ul {
+  margin-top: var(--sidebar-items-list-margin);
+  padding: var(--sidebar-items-list-padding);
+}
+
+.item {
+  border: var(--sidebar-item-border);
+  color: var(--sidebar-item-color);
+  cursor: pointer;
+  font-size: var(--sidebar-item-font-size);
+  list-style: none;
+  outline: none;
+}
+
+.item svg {
+  margin-right: var(--sidebar-item-icon-margin-right);
+}
+
+.item:hover {
+  background-color: var(--sidebar-item-hover-background-color);
+  border-bottom-color: var(--sidebar-item-hover-border-bottom-color);
+  border-top-color: var(--sidebar-item-hover-border-top-color);
+  color: var(--sidebar-item-hover-color);
+}
+
+.active {
+  background-color: var(--sidebar-item-selected-background-color);
+  border-bottom-color: var(--sidebar-item-selected-border-bottom-color);
+  border-top-color: var(--sidebar-item-selected-border-top-color);
+  color: var(--sidebar-item-selected-color);
+}
+
+.link,
+.text {
+  color: var(--sidebar-text-link-color);
+  display: block;
+  margin: var(--sidebar-text-link-margin);
+  padding: var(--sidebar-text-link-padding);
+  outline: none;
+
+  & span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  & svg {
+    width: var(--sidebar-text-link-icon-width);
+    height: var(--sidebar-text-link-icon-height);
+  }
+}
+
+.item > .link,
+.item > .text {
+  padding-bottom: var(--sidebar-item-text-link-padding-bottom);
+  padding-top: var(--sidebar-item-text-link-padding-top);
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.info {
+
+  & .title,
+  & .toggle {
+    padding-left: var(--sidebar-info-toggle-padding-left);
+    padding-right: var(--sidebar-info-toggle-padding-right);
+  }
+}
+
+.showInfos {
+  background-color: var(--sidebar-showinfo-background-color);
+}
+
+.title {
+  color: var(--sidebar-title-color);
+  font-size: var(--sidebar-title-font-size);
+  line-height: var(--sidebar-title-line-height);
+  margin: var(--sidebar-title-margin);
+}
+
+.toggle {
+  color: var(--sidebar-toggle-color);
+  cursor: pointer;
+  font-size: var(--sidebar-toggle-font-size);
+  margin-bottom: var(--sidebar-toggle-margin-bottom);
+  margin-top: var(--sidebar-toggle-margin-top);
+  outline: none;
+  text-transform: var(--sidebar-toggle-text-transform);
+  user-select: none;
+
+  & p {
+    margin: var(--sidebar-toggle-paragraph-margin);
+  }
+}

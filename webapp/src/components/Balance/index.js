@@ -10,7 +10,7 @@ const Balance = ({
   infos,
   theme,
 }) => (
-  <div className={theme.infoOptions}>
+  <div className={theme.balance}>
     <ul>
       {infos.map(info => (
         <li>
@@ -30,7 +30,7 @@ const Balance = ({
 
 Balance.propTypes = {
   theme: PropTypes.shape({
-    infoOptions: PropTypes.string,
+    balance: PropTypes.string,
   }).isRequired,
   infos: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
