@@ -102,12 +102,21 @@ class Table extends Component {
     this.renderRow = this.renderRow.bind(this)
   }
 
+  componentWillReceiveProps ({ expandedRows, selectedRows }) {
+    this.setState({
+      expandedRows,
+      selectedRows,
+    })
+  }
+
   handleRowSelect (rowIndex) {
     const rows = toggleRow(rowIndex, this.state.selectedRows)
     this.setState({
       selectedRows: rows,
     })
-    this.props.onSelectRow(rows)
+    if (this.props.onSelectRow) {
+      this.props.onSelectRow(rows)
+    }
   }
 
   handleRowExpand (rowIndex) {
@@ -134,14 +143,15 @@ class Table extends Component {
   handleSelect () {
     const { selectedRows } = this.state
     const { rows } = this.props
-    if (selectedRows.length === rows.length) {
-      this.setState({
-        selectedRows: [],
-      })
-    } else {
-      this.setState({
-        selectedRows: rows.map((row, index) => index),
-      })
+    let newOrder = []
+    if (selectedRows.length !== rows.length) {
+      newOrder = rows.map((row, index) => index)
+    }
+    this.setState({
+      selectedRows: newOrder,
+    })
+    if (this.props.onSelectRow) {
+      this.props.onSelectRow(newOrder)
     }
   }
 
@@ -150,18 +160,15 @@ class Table extends Component {
     const {
       columns,
       columnsNumber,
-      expandable,
       selectable,
     } = this.props
     const isExpanded = contains(index, expandedRows)
     const isSelected = contains(index, selectedRows)
     const stripedClass = getStripedClass(index)
-
     const rowProps = {
-      columns,
+      columns: columns.slice(0, columnsNumber),
       columnsNumber,
       data: row,
-      expandable,
       expanded: isExpanded,
       index,
       key: shortid(),
@@ -192,11 +199,12 @@ class Table extends Component {
 
   render () {
     const {
-      theme,
-      rows,
-      columns,
       columnIndex,
+      columns,
+      columnsNumber,
       orderingSequence,
+      rows,
+      theme,
     } = this.props
 
     const allSelected = this.state.selectedRows.length === rows.length
@@ -204,7 +212,7 @@ class Table extends Component {
     return (
       <table className={theme.table}>
         <TableHead
-          columns={columns}
+          columns={columns.slice(0, columnsNumber)}
           columnIndex={columnIndex}
           onOrder={this.handleColumnOrder}
           onSelect={this.handleSelect}

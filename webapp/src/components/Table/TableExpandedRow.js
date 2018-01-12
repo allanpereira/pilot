@@ -12,16 +12,12 @@ import {
 } from 'ramda'
 import { themr } from 'react-css-themr'
 import classNames from 'classnames'
-
 import Button from '../Button'
 import TableEmptyItem from './TableEmptyItem'
 
 const applyThemr = themr('UITable')
-
 const hasRenderer = has('renderer')
-
 const accessColumnData = acessor => path(acessor)
-
 const getColData = (column, data) => {
   if (hasRenderer(column)) {
     return <span> { column.renderer(data) } </span>
@@ -33,7 +29,6 @@ const getColData = (column, data) => {
   }
   return <TableEmptyItem />
 }
-
 const getRenderColumn = data => (column, index) => (
   <li key={`colum_${index}`}>
     <span> {column.title} </span>
@@ -48,14 +43,13 @@ const TableExpandedRow = ({
   data,
 }) => {
   const renderColumn = getRenderColumn(data)
+  const cols = columns.map(renderColumn)
   return (
     <tr className={classNames(theme.tableRow, theme[striped])}>
       <td colSpan="9">
         <div className={theme.merged}>
           <ul>
-            {
-              columns.map(renderColumn)
-            }
+            { cols }
           </ul>
           <Button
             fill="outline"

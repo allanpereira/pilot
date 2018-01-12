@@ -38,9 +38,8 @@ class TableHead extends Component {
     this.renderColumn = this.renderColumn.bind(this)
   }
 
-  handleOrderChange () {
-    const { onOrder, columnIndex } = this.props
-    onOrder(columnIndex)
+  handleOrderChange (index) {
+    this.props.onOrder(index)
   }
 
   renderColumn (column, index) {
@@ -52,7 +51,7 @@ class TableHead extends Component {
       <th
         key={`column_${index + 1}`}
         className={selectedClass}
-        onClick={this.handleOrderChange}
+        onClick={() => this.handleOrderChange(index)}
       >
         <span> {column.title} </span>
         {
