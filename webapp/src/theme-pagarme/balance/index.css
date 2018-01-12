@@ -1,34 +1,34 @@
 @import "./properties.css";
 
-.infoOptions {
-  border-bottom: var(--sidebar-info-options-border-bottom);
+.balance {
+  border-bottom: var(--balance-border-bottom);
 
   & ul {
-    margin: var(--sidebar-info-options-list-margin);
-    padding: var(--sidebar-info-options-list-padding);
-    margin-top: var(--sidebar-info-options-list-margin-top);
+    margin: var(--balance-list-margin);
+    padding: var(--balance-list-padding);
+    margin-top: var(--balance-list-margin-top);
   }
 
   & li {
-    border-top: var(--sidebar-info-options-list-item-border-top);
+    border-top: var(--balance-list-item-border-top);
     list-style: none;
-    padding: var(--sidebar-info-options-list-item-padding);
+    padding: var(--balance-list-item-padding);
   }
 
   & p {
-    color: var(--color-white);
-    font-size: var(--sidebar-info-options-font-size);
-    margin: var(--sidebar-info-options-maring);
-    text-transform: var(--sidebar-info-options-text-transform);
+    color: var(--balance-text-color);
+    font-size: var(--balance-text-font-size);
+    margin: var(--balance-text-maring);
+    text-transform: var(--balance-text-text-transform);
   }
 
   & p:last-child {
-    font-size: var(--sidebar-info-options-last-child-font-size);
-    margin-bottom: var(--sidebar-info-options-last-child-margin-bottom);
-    margin-top: var(--sidebar-info-options-last-child-margin-top);
+    font-size: var(--balance-text-last-child-font-size);
+    margin-bottom: var(--balance-text-last-child-margin-bottom);
+    margin-top: var(--balance-text-last-child-margin-top);
   }
 
   & small {
-    font-size: var(--sidebar-info-options-small-font-size);
+    font-size: var(--balance-small-font-size);
   }
 }
